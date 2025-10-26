@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Rule, Schedule } from 'aws-cdk-lib/aws-events';
+import { EventBus, Rule, Schedule } from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as logs from 'aws-cdk-lib/aws-logs';
@@ -26,9 +26,12 @@ export class ThesisDataPipeline extends cdk.Stack {
         });
 
         // EventBridge Rule to trigger Lambda on schedule
+        const eventBus = EventBus.fromEventBusName(this, 'DefaultEventBus', 'default');
         const rule = new Rule(this, 'ThesisDataPipelineTriggerRule', {
             ruleName: 'ThesisDataPipelineTriggerRule',
+            eventBus: eventBus,
             schedule: Schedule.cron({ minute: '0', hour: '0', day: '*', month: '*', year: '*' }),
+            enabled: true
             // logGroup: '',
         })
         // EventBridge Rule Log Group
