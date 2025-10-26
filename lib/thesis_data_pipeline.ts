@@ -26,13 +26,10 @@ export class ThesisDataPipeline extends cdk.Stack {
         });
 
         // EventBridge Rule to trigger Lambda on schedule
-        const eventBus = EventBus.fromEventBusName(this, 'DefaultEventBus', 'default');
         const rule = new Rule(this, 'ThesisDataPipelineTriggerRule', {
             ruleName: 'ThesisDataPipelineTriggerRule',
-            eventBus: eventBus,
             schedule: Schedule.cron({ minute: '0', hour: '0', day: '*', month: '*', year: '*' }),
             enabled: true
-            // logGroup: '',
         })
         // EventBridge Rule Log Group
         // new logs.LogGroup(this, 'EventBridgeRuleLogGroup', {
