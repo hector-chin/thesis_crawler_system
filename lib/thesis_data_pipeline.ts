@@ -4,11 +4,10 @@ import { EventBus, Rule, Schedule } from 'aws-cdk-lib/aws-events';
 import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as logs from 'aws-cdk-lib/aws-logs';
-
+export const functionName = 'ThesisDataCrawlerFunction';
 export class ThesisDataPipeline extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
-        const functionName = 'ThesisDataCrawlerFunction';
         const lambdaFunction = new lambda.Function(this, 'ThesisLambdaFunction', {
             functionName: functionName,
             runtime: lambda.Runtime.PYTHON_3_12,
