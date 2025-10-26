@@ -14,8 +14,8 @@ export class ThesisDataPipeline extends cdk.Stack {
             runtime: lambda.Runtime.PYTHON_3_12,
             description: 'Lambda function for crawling arXiv.org thesis',
             handler: 'thesis_crawler.handler',
-            memorySize: 1024,
-            ephemeralStorageSize: cdk.Size.mebibytes(32),
+            memorySize: 128,
+            ephemeralStorageSize: cdk.Size.mebibytes(512),
             timeout: cdk.Duration.minutes(10),
             code: lambda.Code.fromAsset('../thesis_crawler_system/lambda_code/'),
             logGroup: new logs.LogGroup(this, 'ThesisLambdaLogGroup', {
