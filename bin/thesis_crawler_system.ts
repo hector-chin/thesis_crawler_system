@@ -1,9 +1,16 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
 import { ThesisCrawlerSystemStack } from '../lib/thesis_crawler_system-stack';
+import { ThesisDataPipeline } from '../lib/thesis_data_pipeline';
 
 const app = new cdk.App();
+
+new ThesisDataPipeline(app, 'ThesisDataPipelineStack', {
+  env: { account: '411767351069', region: 'ap-northeast-1' },
+});
+
 new ThesisCrawlerSystemStack(app, 'ThesisCrawlerSystemStack', {
+  env: { account: '411767351069', region: 'ap-northeast-1' },
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
